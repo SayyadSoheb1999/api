@@ -17,7 +17,7 @@ console.log(process.env.MONGO_URL || "ssssss");
 mongoDB.set("strictQuery", false);
 
 mongoDB
-  .connect("mongodb+srv://Soheb:Soheb%401999@cluster0.cbtaqj", {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
   })
   .then(console.log(`connect to database`))

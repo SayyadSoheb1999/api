@@ -38,10 +38,10 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("Image Uploaded successfully");
 });
 
-// app.get("/lama", (req, res) => {
-//   console.log(`request is called on /lama`);
-//   res.send(`request is called on /lama`);
-// });
+app.get("/lama", (req, res) => {
+  console.log(`request is called on /lama`);
+  res.send(`request is called on /lama`);
+});
 // app.post("/ll", (req, res) => {
 //   let data = req.body;
 //   console.log("post /lama", req);

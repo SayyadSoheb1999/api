@@ -17,7 +17,9 @@ console.log(process.env.MONGO_URL || "ssssss");
 mongoDB.set("strictQuery", false);
 
 mongoDB
-  .connect(process.env.MONGO_URL, { useNewUrlParser: true })
+  .connect("mongodb+srv://Soheb:Soheb%401999@cluster0.cbtaqj", {
+    useNewUrlParser: true,
+  })
   .then(console.log(`connect to database`))
   .catch((error) => {
     console.log("Error:", error);

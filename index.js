@@ -8,7 +8,7 @@ const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const categoriesRouter = require("./routes/categories");
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -17,10 +17,7 @@ console.log(process.env.MONGO_URL || "ssssss");
 mongoDB.set("strictQuery", false);
 
 mongoDB
-  .connect(
-    "mongodb+srv://Soheb:Soheb%401999@cluster0.cbtaqjr.mongodb.net/blog?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
-  )
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true })
   .then(console.log(`connect to database`))
   .catch((error) => {
     console.log("Error:", error);
@@ -56,6 +53,6 @@ app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
 app.use("/api/categories", categoriesRouter);
 
-app.listen(5000, (req, res) => {
-  console.log("Listning on port 5000");
+app.listen(PORT, (req, res) => {
+  console.log("Listning on port 3000");
 });

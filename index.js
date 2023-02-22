@@ -9,7 +9,7 @@ const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
 const categoriesRouter = require("./routes/categories");
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -57,6 +57,6 @@ app.use("/api/users", usersRouter);
 app.use("/api/posts", postsRouter);
 app.use("/api/categories", categoriesRouter);
 
-app.listen(5000, (req, res) => {
-  console.log("Listning on port 5000");
+app.listen(PORT, (req, res) => {
+  console.log("Listning on port 3000");
 });

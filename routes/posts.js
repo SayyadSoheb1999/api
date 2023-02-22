@@ -67,7 +67,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const postt = await APost.findById(req.params.id);
-    res.status(200).json(postt);
+    res.status(200).json();
   } catch (err) {
     res.status(500).json(err);
   }
@@ -84,9 +84,7 @@ router.get("/", async (req, res) => {
       posts = await APost.find({ username: userName });
     } else if (catName) {
       posts = await APost.find({
-        categories: {
-          $in: [catName],
-        },
+        categories: catName,
       });
     } else {
       posts = await APost.find();

@@ -1,3 +1,4 @@
+var colors = require("colors");
 const express = require("express");
 // const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
@@ -17,12 +18,13 @@ console.log(process.env.MONGO_URL || "ssssss");
 mongoDB.set("strictQuery", false);
 
 mongoDB
-  .connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-  })
-  .then(console.log(`connect to database`))
+  .connect(
+    "mongodb+srv://Soheb:Soheb%401999@cluster0.cbtaqjr.mongodb.net/newOne?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
+  )
+  .then(console.log(`connect to database`.bgGreen))
   .catch((error) => {
-    console.log("Error:", error);
+    console.log("Error:".bgRed, error);
   });
 
 // Image UPLOAD code
@@ -41,14 +43,14 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 });
 
 app.get("/lama", (req, res) => {
-  console.log(`request is called on /lama`);
+  console.log(`request is called on /lama`.red);
   res.send(`request is called on /lama`);
 });
-// app.post("/ll", (req, res) => {
-//   let data = req.body;
-//   console.log("post /lama", req);
-//   res.send("Data Received: " + JSON.stringify(data));
-// });
+app.post("/ll", (req, res) => {
+  let data = req.body;
+  console.log("post /lama".bgRed, req);
+  res.send("Data Received: " + JSON.stringify(data));
+});
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);

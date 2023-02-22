@@ -56,7 +56,7 @@ router.get("/:id", async (req, res) => {
     const user = await User.findById(req.params.id);
     const { password, ...rest } = user._doc;
     res.status(200).json(rest);
-    console.log("reg user in callled");
+    console.log("reg user in callled".green.bgRed);
   } catch (err) {
     res.status(404).json(err);
   }

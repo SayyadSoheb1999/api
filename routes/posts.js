@@ -1,17 +1,18 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const Post = require("../modals/Post");
+// const Post = require("../modals/Post");
+const APost = require("../modals/AnotherPost");
 
 const User = require("../modals/User");
 
-// CREATE USER
-router.post("/", async (req, res) => {
-  const newPost = new Post(req.body);
+// ADD POSTS
+router.post("/create", async (req, res) => {
+  const newPost = new APost(req.body);
   try {
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("ss", err);
   }
 });
 
@@ -19,10 +20,10 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await APost.findById(req.params.id);
     if (post.username === req.body.username) {
       try {
-        const updatedPost = await Post.findByIdAndUpdate(
+        const updatedPost = await APost.findByIdAndUpdate(
           req.params.id,
           {
             $set: req.body,
@@ -45,11 +46,10 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const selectedPost = await Post.findById(req.params.id);
-    // console.log(`${post} this is not available`);
+    const selectedPost = await APost.findById(req.params.id);
     if (selectedPost.username === req.body.username) {
       try {
-        await Post.findByIdAndDelete(req.params.id);
+        await APost.findByIdAndDelete(req.params.id);
         res.status(200).json("POST has been Deleted succesfull");
       } catch (err) {
         res.status(500).json(err);
@@ -66,7 +66,7 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const postt = await Post.findById(req.params.id);
+    const postt = await APost.findById(req.params.id);
     res.status(200).json(postt);
   } catch (err) {
     res.status(500).json(err);
@@ -81,15 +81,15 @@ router.get("/", async (req, res) => {
   try {
     let posts;
     if (userName) {
-      posts = await Post.find({ username: userName });
+      posts = await APost.find({ username: userName });
     } else if (catName) {
-      posts = await Post.find({
+      posts = await APost.find({
         categories: {
           $in: [catName],
         },
       });
     } else {
-      posts = await Post.find();
+      posts = await APost.find();
     }
     res.status(200).json(posts);
   } catch (err) {

@@ -84,7 +84,7 @@ router.get("/", async (req, res) => {
       posts = await APost.find({ username: userName });
     } else if (catName) {
       posts = await APost.find({
-        categories: catName,
+        category: catName,
       });
     } else {
       posts = await APost.find();
